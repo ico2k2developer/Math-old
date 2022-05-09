@@ -44,23 +44,16 @@ arrayp resize(arrayp* source,TYPE_ARRAY_SIZE bytes)
 {
     if(!source)
         return NULL;
-    arrayp a = *source;
-    if(!a)
+    if(!*source)
         return NULL;
-    if(bytes != a->bytes)
+    if(bytes != (*source)->bytes)
     {
-        arrayp new = newa(bytes);
-        if(!new)
+        (*source)->a = realloc((*source)->a,bytes);
+        if(!(*source)->a && bytes != 0)
             return NULL;
-        TYPE_ARRAY_SIZE i,limit;
-        limit = a->used > bytes ? bytes : a->used;
-        foreach(limit,i)
-        {
-            seta(new,i,geta(a, i));
-            new->used++;
-        }
-        dela(a);
-        *source = new;
+        (*source)->bytes = bytes;
+        if((*source)->used > bytes)
+            (*source)->used = bytes;
     }
     return *source;
 }
@@ -100,17 +93,27 @@ arrayp copya(arrayp source)
 
 size_t sizeofa(arrayp a)
 {
+    if(!a)
+        return 0;
     return a->bytes + sizeof(array);
 }
 
 unsigned char issima(arrayp a,arrayp b)
 {
-    return a->bytes == b->bytes && a->used == b->used;
+    if(!a)
+        return !b;
+    if(!b)
+        return !a;
+    return a->bytes == b->bytes;
 }
 
 unsigned char iseqa(arrayp a,arrayp b)
 {
+    if(!a && !b)
+        return 1;
     if(!issima(a,b))
+        return 0;
+    if(a->used != b->used)
         return 0;
     TYPE_ARRAY_SIZE i;
     foreachau(a,i)
@@ -129,22 +132,54 @@ void dela(arrayp a)
 
 arrayp stracpy(arrayp destination, arrayp source)
 {
-    strcpy_s(atos(destination), destination->bytes, atos(source));
-    destination->used = source->used;
+    if(!destination)
+        return NULL;
+    if(!source)
+    {
+        memset(atos(destination),0,destination->bytes);
+        destination->used = 0;
+    }
+    else
+    {
+        strcpy_s(atos(destination), destination->bytes, atos(source));
+        destination->used = source->used;
+    }
     return destination;
 }
 
 arrayp strancpy(arrayp destination, TYPE_ARRAY_SIZE count, arrayp source)
 {
-    strncpy_s(atos(destination), destination->bytes, atos(source), count);
-    destination->used = strnlen_s(atos(destination),destination->bytes);
+    if(count == 0)
+        return destination;
+    if(!destination)
+        return NULL;
+    if(!source)
+    {
+        memset(atos(destination),0,count);
+        destination->used = 0;
+    }
+    else
+    {
+        strncpy_s(atos(destination), destination->bytes, atos(source), count);
+        destination->used = strnlen_s(atos(destination),destination->bytes);
+    }
     return destination;
 }
 
 arrayp stracpy2(arrayp destination,const char* source)
 {
-    strcpy_s(atos(destination), destination->bytes, source);
-    destination->used = strnlen_s(atos(destination),destination->bytes);
+    if(!destination)
+        return NULL;
+    if(!source)
+    {
+        memset(atos(destination),0,destination->bytes);
+        destination->used = 0;
+    }
+    else
+    {
+        strcpy_s(atos(destination), destination->bytes, source);
+        destination->used = strnlen_s(atos(destination),destination->bytes);
+    }
     return destination;
 }
 

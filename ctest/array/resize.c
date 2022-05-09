@@ -5,7 +5,7 @@
 
 #include <array.h>
 
-ctest(
+cteststart()
         arrayp a = newa(2);
         seta(a,0,3);
         seta(a,1,7);
@@ -28,7 +28,7 @@ ctest(
         nonnull(resize(&a,0));
         zero(a->bytes);
         zero(a->used);
-        nonnull(a->a);
+        null(a->a);
 
         nonnull(resize(&a,5));
         assert(a->bytes == 5);
@@ -36,4 +36,4 @@ ctest(
         nonnull(a->a);
 
         null(resize(NULL,0));
-)
+ctestend

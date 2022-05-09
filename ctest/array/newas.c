@@ -6,7 +6,7 @@
 #include <array.h>
 #include <string.h>
 
-ctest(
+cteststart()
         null(newas(NULL,0));
         arrayp s;
 
@@ -34,4 +34,4 @@ ctest(
         zero(strcmp(atos(s),""));
         assert(s->used == strnlen_s("",5));
         assert(s->bytes == (sizeof(char) * (1 + strnlen_s("",5))));
-)
+ctestend

@@ -5,7 +5,7 @@
 
 #include <array.h>
 
-ctest(
+cteststart()
         arrayp a;
         TYPE_ARRAY_SIZE i;
 
@@ -34,6 +34,4 @@ ctest(
         zero(a->used);
         foreach(a->bytes,i)
             zero(geta(a,i));
-)
-
-
+ctestend

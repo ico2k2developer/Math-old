@@ -5,7 +5,7 @@
 
 #include <array.h>
 
-ctest(
+cteststart()
         arrayp source = newa0(10);
         TYPE_ARRAY_SIZE i;
         foreachau(source,i)
@@ -28,4 +28,4 @@ ctest(
         null(copy->a);
 
         null(copya(NULL));
-)
+ctestend

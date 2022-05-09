@@ -7,7 +7,8 @@
 
 #define error() ERR = 1
 
-#define ctest(x) int ctest() { int ERR = 0; do { x } while(0); return ERR; } int main() { return ctest(); }
+#define cteststart() int ctest() { int ERR = 0; do {
+#define ctestend } while(0); return ERR; } int main() { return ctest(); }
 
 #define assert(...) do { if(!(__VA_ARGS__)) { fputs("Assertion \"" #__VA_ARGS__ "\" failed at line " \
         STR(__LINE__)"\n",stderr); error(); } } while(0)
