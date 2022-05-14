@@ -10,8 +10,8 @@
 #include <stdint.h>
 #include <string.h>
 
-#define geta(array,index) ((array)->a[index])
-#define seta(array,index,value) geta(array,index) = ((char)(value))
+#define geta(array,index) (((array)->a)[index])
+#define seta(array,index,value) geta(array,index) = (value)
 #define atos(array) ((char*)array->a)
 #define foreach(count,i) for(i = 0; i < count; i++)
 #define foreachR(count,i) for(i = count; i > 0; i--)

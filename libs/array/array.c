@@ -36,7 +36,12 @@ arrayp newas(char* string,TYPE_ARRAY_SIZE length)
     if(!string)
         return NULL;
     arrayp a = newa((strnlen_s(string,length) + 1) * sizeof(char));
-    strancpy2(a,length,string);
+    if(!a)
+        return NULL;
+    if(length == 0)
+        seta(a,0,0);
+    else
+        strancpy2(a,length,string);
     return a;
 }
 
@@ -185,7 +190,19 @@ arrayp stracpy2(arrayp destination,const char* source)
 
 arrayp strancpy2(arrayp destination, TYPE_ARRAY_SIZE count,const char* source)
 {
-    strncpy_s(atos(destination), destination->bytes, source, count);
-    destination->used = strnlen_s(atos(destination),destination->bytes);
+    if(count == 0)
+        return destination;
+    if(!destination)
+        return NULL;
+    if(!source)
+    {
+        memset(atos(destination),0,count);
+        destination->used = 0;
+    }
+    else
+    {
+        strncpy_s(atos(destination), destination->bytes, source, count);
+        destination->used = strnlen_s(atos(destination),destination->bytes);
+    }
     return destination;
 }
