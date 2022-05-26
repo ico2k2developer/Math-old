@@ -35,8 +35,13 @@ array_p array_news(char* string, TYPE_ARRAY_SIZE length)
 {
     if(!string)
         return NULL;
-    array_p a = array_new((strnlen_s(string, length) + 1) * sizeof(char));
-    array_strncpy2(a, length, string);
+    arrayp a = newa((strnlen_s(string,length) + 1) * sizeof(char));
+    if(!a)
+        return NULL;
+    if(length == 0)
+        seta(a,0,0);
+    else
+        strancpy2(a,length,string);
     return a;
 }
 
@@ -185,7 +190,19 @@ array_p array_strcpy2(array_p destination, const char* source)
 
 array_p array_strncpy2(array_p destination, TYPE_ARRAY_SIZE count, const char* source)
 {
-    strncpy_s(atos(destination), destination->bytes, source, count);
-    destination->used = strnlen_s(atos(destination),destination->bytes);
+    if(count == 0)
+        return destination;
+    if(!destination)
+        return NULL;
+    if(!source)
+    {
+        memset(atos(destination),0,count);
+        destination->used = 0;
+    }
+    else
+    {
+        strncpy_s(atos(destination), destination->bytes, source, count);
+        destination->used = strnlen_s(atos(destination),destination->bytes);
+    }
     return destination;
 }
