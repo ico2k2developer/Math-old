@@ -35,13 +35,13 @@ array_p array_news(char* string, TYPE_ARRAY_SIZE length)
 {
     if(!string)
         return NULL;
-    arrayp a = newa((strnlen_s(string,length) + 1) * sizeof(char));
+    array_p a = array_new((strnlen_s(string,length) + 1) * sizeof(char));
     if(!a)
         return NULL;
     if(length == 0)
         seta(a,0,0);
     else
-        strancpy2(a,length,string);
+        array_strncpy2(a,length,string);
     return a;
 }
 
