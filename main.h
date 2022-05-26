@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <array.h>
-#include <literal.h>
+//#include <literal-old.h>
 
 #define SIZE_BUFFER     200
 #define SIZE_VARIABLES  10

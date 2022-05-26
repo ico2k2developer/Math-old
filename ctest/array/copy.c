@@ -16,16 +16,16 @@ cteststart()
         nonnull(copy);
         assert(copy->bytes == source->bytes);
         assert(copy->used == source->used);
-        nonnull(copy->a);
+        nonnull(copy->data);
         foreachau(copy,i)
             assert(geta(source,i) == ((i + 1) * 2));
 
-        source->a = NULL;
+        source->data = NULL;
         copy = array_copy(source);
         nonnull(copy);
         assert(copy->bytes == source->bytes);
         assert(copy->used == source->used);
-        null(copy->a);
+        null(copy->data);
 
         null(array_copy(NULL));
 ctestend

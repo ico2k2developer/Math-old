@@ -2,13 +2,14 @@
 
 int main(void)
 {
+    /*
     array_p string = array_new(SIZE_BUFFER + 1);
     if(!string)
         return 1;
-    array_p variables = array_new(sizeof(variable) * SIZE_VARIABLES);
+    array_p variables = array_new(sizeof(variable_t) * SIZE_VARIABLES);
     if(!variables)
         return 2;
-    array_p matrices = array_new(sizeof(matrix) * SIZE_MATRICES);
+    array_p matrices = array_new(sizeof(matrix_t) * SIZE_MATRICES);
     if(!matrices)
         return 3;
 
@@ -30,7 +31,7 @@ int main(void)
     printma(matrices);
     for(; variables->used > 0; variables->used--)
     {
-        delv((variablep)geta(variables, variables->used - 1));
+        delv((variable_p)geta(variables, variables->used - 1));
     }
     for(; matrices->used > 0; matrices->used--)
     {
@@ -41,4 +42,5 @@ int main(void)
     array_del(string);
     fputc('\n',stdout);
     return 0;
+     */
 }

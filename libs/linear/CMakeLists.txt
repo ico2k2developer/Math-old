@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.21)
-project(literal C)
+project(linear C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_library(linear literal.c var.c matrix.c doc.h)
+add_library(linear linear.c)
+target_link_libraries(linear bool8)
 target_link_libraries(linear array)
+target_link_libraries(linear numbers)
 target_include_directories(linear PUBLIC .)

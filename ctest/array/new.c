@@ -10,7 +10,7 @@ cteststart()
 
         a = array_new(1);
         nonnull(a);
-        nonnull(a->a);
+        nonnull(a->data);
         assert(a->bytes == 1);
         zero(a->used);
 
@@ -18,14 +18,14 @@ cteststart()
         seta(a,0,4);
         a->used++;
         nonnull(a);
-        nonnull(a->a);
+        nonnull(a->data);
         assert(a->bytes == 2);
         assert(a->used == 1);
         assert(geta(a,0) == 4);
 
         a = array_new(0);
         nonnull(a);
-        nonnull(a->a);
+        nonnull(a->data);
         zero(a->bytes);
         zero(a->used);
 ctestend

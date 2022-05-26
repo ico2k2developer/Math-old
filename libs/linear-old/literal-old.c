@@ -1,7 +1,7 @@
 //
 // Created by Ico on 21/4/2022.
 //
-#include "literal.h"
+#include "literal-old.h"
 
 char isop(char op)
 {
@@ -46,7 +46,7 @@ void parseEntities(array_p* variables, array_p* matrices, char* string, unsigned
                 if(m)
                     seta(*matrices, (*matrices)->used++, m);
                 else
-                    fprintf(stderr,"Error occurred while loading matrix.\n");
+                    fprintf(stderr,"Error occurred while loading matrix_t.\n");
                 type = NONE;
                 break;
             }
@@ -88,7 +88,7 @@ unsigned char parseExpression(array_p* expression, char* string, unsigned short 
         if(isop(string[i]) || (isalnum(string[i]) && count == 0))
             count++;
     }
-    *expression = array_new(sizeof(variable) * count);
+    *expression = array_new(sizeof(variable_t) * count);
     if(!*expression)
         return 0;
     count = 0;
@@ -110,7 +110,7 @@ unsigned char parseExpression(array_p* expression, char* string, unsigned short 
     return 1;
 }
 
-unsigned char loadEntity(variablep* entity,char* string,unsigned char length)
+unsigned char loadEntity(variable_p* entity, char* string, unsigned char length)
 {
     short i;
     unsigned char next = 1,valid = 0;

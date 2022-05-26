@@ -14,26 +14,26 @@ cteststart()
         assert(array_resize(&a, 2) == a);
         assert(a->bytes == 2);
         assert(a->used == 2);
-        nonnull(a->a);
+        nonnull(a->data);
         assert(geta(a,0) == 3);
         assert(geta(a,1) == 7);
 
         nonnull(array_resize(&a, 10));
         assert(a->bytes == 10);
         assert(a->used == 2);
-        nonnull(a->a);
+        nonnull(a->data);
         assert(geta(a,0) == 3);
         assert(geta(a,1) == 7);
 
         nonnull(array_resize(&a, 0));
         zero(a->bytes);
         zero(a->used);
-        null(a->a);
+        null(a->data);
 
         nonnull(array_resize(&a, 5));
         assert(a->bytes == 5);
         zero(a->used);
-        nonnull(a->a);
+        nonnull(a->data);
 
         null(array_resize(NULL, 0));
 ctestend

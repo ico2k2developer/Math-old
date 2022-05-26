@@ -11,6 +11,9 @@ target_link_libraries(Math2 bool8)
 add_subdirectory(libs/array)
 target_link_libraries(Math2 array)
 
+add_subdirectory(libs/numbers)
+target_link_libraries(Math2 numbers)
+
 add_subdirectory(libs/linear)
 target_link_libraries(Math2 linear)
 

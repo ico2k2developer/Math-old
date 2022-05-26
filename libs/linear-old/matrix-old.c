@@ -2,7 +2,7 @@
 // Created by ico2k2 on 5/5/2022.
 //
 
-#include "literal.h"
+#include "literal-old.h"
 
 char ismatrx(char matrx)
 {
@@ -18,7 +18,7 @@ char ismatrx(char matrx)
 
 matrixp newme(TYPE_MATRIX_DIM_COUNT rows, TYPE_MATRIX_DIM_COUNT cols)
 {
-    matrixp m = (matrixp)malloc(sizeof(matrix));
+    matrixp m = (matrixp)malloc(sizeof(matrix_t));
     if(!m)
         return NULL;
     m->rows = rows;
@@ -86,7 +86,7 @@ matrixp newm(array_p string)
                 col++;
                 if(col != cols)
                 {
-                    fprintf(stderr,"Given string is not correctly representing a matrix:"
+                    fprintf(stderr,"Given string is not correctly representing a matrix_t:"
                                    " multiple row lengths. Using shortest row as reference.\n");
                     if(cols > col)
                         cols = col;
@@ -98,7 +98,7 @@ matrixp newm(array_p string)
     }
     if(!finish || start >= end)
         return NULL;
-    //printf("Creating matrix with rows %u and cols %u.\n",rows,cols);
+    //printf("Creating matrix_t with rows %u and cols %u.\n",rows,cols);
     matrixp m = newme(rows,cols);
     if(!m)
         return NULL;
@@ -115,7 +115,7 @@ matrixp newm(array_p string)
                 {
                     if(parseExpression(m->data[row] + col, atos(string) + s, i - s))
                     {
-                        //printf("Assigned matrix cell in row %u and col %u with ",row + 1,col + 1);
+                        //printf("Assigned matrix_t cell in row %u and col %u with ",row + 1,col + 1);
                         //printe(m->data[row][col]);
                         //fputc('\n',stdout);
                         col++;
@@ -157,7 +157,7 @@ size_t sizeofm(matrixp m)
 {
     TYPE_MATRIX_DIM_COUNT row,col;
     TYPE_ARRAY_SIZE i;
-    size_t size = sizeof(matrix);
+    size_t size = sizeof(matrix_t);
     foreach(m->rows,row)
     {
         foreach(m->cols,col)
@@ -292,7 +292,7 @@ unsigned char summ(matrixp target, matrixp offset)
     }
     else
     {
-        fprintf(stderr,"Cannot sum a %ux%u matrix to a %ux%u.\n",
+        fprintf(stderr,"Cannot sum a %ux%u matrix_t to a %ux%u.\n",
                 target->rows,target->cols,
                 offset->rows,offset->cols);
         return 0;
