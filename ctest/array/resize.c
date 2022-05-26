@@ -36,4 +36,5 @@ cteststart()
         nonnull(a->data);
 
         null(array_resize(NULL, 0));
+        array_del(a);
 ctestend

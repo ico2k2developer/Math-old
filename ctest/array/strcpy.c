@@ -32,4 +32,7 @@ cteststart()
         zero(geta(s1,6));
 
         null(array_strcpy(NULL, NULL));
+
+        array_del(s1);
+        array_del(s2);
 ctestend

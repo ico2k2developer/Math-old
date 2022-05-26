@@ -28,4 +28,7 @@ cteststart()
         null(copy->data);
 
         null(array_copy(NULL));
+
+        array_del(source);
+        array_del(copy);
 ctestend

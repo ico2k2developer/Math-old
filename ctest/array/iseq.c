@@ -35,4 +35,7 @@ cteststart()
         assert(!array_iseq(a, NULL));
         assert(!array_iseq(NULL, b));
         assert(array_iseq(NULL, NULL));
+
+        array_del(a);
+        array_del(b);
 ctestend

@@ -50,4 +50,7 @@ cteststart()
         null(array_strncpy(NULL, 0, s1));
         null(array_strncpy(NULL, 5, NULL));
         null(array_strncpy(NULL, 0, NULL));
+
+        array_del(s1);
+        array_del(s2);
 ctestend

@@ -31,4 +31,6 @@ cteststart()
         zero(s1->used);
 
         null(array_strcpy2(NULL, NULL));
+
+        array_del(s1);
 ctestend

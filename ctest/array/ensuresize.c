@@ -40,4 +40,6 @@ cteststart()
         assert(geta(a,1) == 7);
 
         null(array_ensuresize(NULL, 0));
+
+        array_del(a);
 ctestend

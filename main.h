@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <array.h>
+#include <numbers.h>
 //#include <literal-old.h>
 
 #define SIZE_BUFFER     200

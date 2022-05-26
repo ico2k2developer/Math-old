@@ -131,7 +131,8 @@ bool8_t array_iseq(const array_p a,const array_p b)
 
 void array_del(const array_p a)
 {
-    free(a->data);
+    if(a)
+        free(a->data);
     free(a);
 }
 

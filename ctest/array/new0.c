@@ -16,6 +16,7 @@ cteststart()
         zero(a->used);
         foreach(a->bytes,i)
             zero(geta(a,i));
+        array_del(a);
 
         a = array_new0(2);
         seta(a,0,4);
@@ -26,6 +27,7 @@ cteststart()
         assert(a->used == 1);
         assert(geta(a,0) == 4);
         assert(geta(a,1) == 0);
+        array_del(a);
 
         a = array_new0(0);
         nonnull(a);
@@ -34,4 +36,5 @@ cteststart()
         zero(a->used);
         foreach(a->bytes,i)
             zero(geta(a,i));
+        array_del(a);
 ctestend

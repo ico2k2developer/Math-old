@@ -2,6 +2,12 @@
 
 int main(void)
 {
+
+    number_N_p n = number_N_new(333);
+    char* s = number_N_print(n);
+    printf("The value of n is %s\n",s);
+    free(s);
+
     /*
     array_p string = array_new(SIZE_BUFFER + 1);
     if(!string)

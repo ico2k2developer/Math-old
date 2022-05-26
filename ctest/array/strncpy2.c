@@ -33,23 +33,25 @@ cteststart()
         assert(s1 == array_strncpy2(s1,3,"QWERTY"));
         nonnull(s1);
         zero(strcmp("QWE", atos(s1)));
-        assert(s1->bytes == (sizeof(char) * 4));
+        assert(s1->bytes == (sizeof(char) * 10));
         assert(s1->used == 3);
         zero(geta(s1,3));
 
         null(array_strncpy2(NULL,33,atos(s1)));
         nonnull(s1);
         zero(strcmp("QWE", atos(s1)));
-        assert(s1->bytes == (sizeof(char) * 4));
+        assert(s1->bytes == (sizeof(char) * 10));
         assert(s1->used == 3);
         zero(geta(s1,3));
 
         assert(s1 == array_strncpy2(s1,33, NULL));
         nonnull(s1);
-        zero(strcmp("QWE", atos(s1)));
-        assert(s1->bytes == (sizeof(char) * 4));
-        assert(s1->used == 3);
-        zero(geta(s1,3));
+        assert(s1->bytes == (sizeof(char) * 10));
+        zero(s1->used);
+        foreach(10,i)
+            zero(geta(s1,i));
 
         null(array_strncpy2(NULL,10, NULL));
+
+        array_del(s1);
 ctestend
