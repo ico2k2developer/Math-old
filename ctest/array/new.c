@@ -6,18 +6,15 @@
 #include <array.h>
 
 cteststart()
-        arrayp a;
-        TYPE_ARRAY_SIZE i;
+        array_p a;
 
-        a = newa0(1);
+        a = array_new(1);
         nonnull(a);
         nonnull(a->a);
         assert(a->bytes == 1);
         zero(a->used);
-        foreach(a->bytes,i)
-            zero(geta(a,i));
 
-        a = newa0(2);
+        a = array_new(2);
         seta(a,0,4);
         a->used++;
         nonnull(a);
@@ -25,13 +22,10 @@ cteststart()
         assert(a->bytes == 2);
         assert(a->used == 1);
         assert(geta(a,0) == 4);
-        assert(geta(a,1) == 0);
 
-        a = newa0(0);
+        a = array_new(0);
         nonnull(a);
         nonnull(a->a);
         zero(a->bytes);
         zero(a->used);
-        foreach(a->bytes,i)
-            zero(geta(a,i));
 ctestend

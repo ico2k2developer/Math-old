@@ -3,9 +3,9 @@
 //
 #include "array.h"
 
-arrayp newa(TYPE_ARRAY_SIZE bytes)
+array_p array_new(TYPE_ARRAY_SIZE bytes)
 {
-    arrayp a = (arrayp)malloc(sizeof(array));
+    array_p a = (array_p)malloc(sizeof(array_t));
     if(!a)
         return NULL;
     a->a = (void*)malloc(bytes);
@@ -19,9 +19,9 @@ arrayp newa(TYPE_ARRAY_SIZE bytes)
     return a;
 }
 
-arrayp newa0(TYPE_ARRAY_SIZE bytes)
+array_p array_new0(TYPE_ARRAY_SIZE bytes)
 {
-    arrayp a = newa(bytes);
+    array_p a = array_new(bytes);
     if(a)
     {
         memset(a->a,0,bytes);
@@ -31,16 +31,16 @@ arrayp newa0(TYPE_ARRAY_SIZE bytes)
     return a;
 }
 
-arrayp newas(char* string,TYPE_ARRAY_SIZE length)
+array_p array_news(char* string, TYPE_ARRAY_SIZE length)
 {
     if(!string)
         return NULL;
-    arrayp a = newa((strnlen_s(string,length) + 1) * sizeof(char));
-    strancpy2(a,length,string);
+    array_p a = array_new((strnlen_s(string, length) + 1) * sizeof(char));
+    array_strncpy2(a, length, string);
     return a;
 }
 
-arrayp resize(arrayp* source,TYPE_ARRAY_SIZE bytes)
+array_p array_resize(array_p* source, TYPE_ARRAY_SIZE bytes)
 {
     if(!source)
         return NULL;
@@ -58,22 +58,22 @@ arrayp resize(arrayp* source,TYPE_ARRAY_SIZE bytes)
     return *source;
 }
 
-arrayp ensuresize(arrayp* source,TYPE_ARRAY_SIZE bytes)
+array_p array_ensuresize(array_p* source, TYPE_ARRAY_SIZE bytes)
 {
     if(!source)
         return NULL;
     if(!*source)
         return NULL;
     if(bytes > (*source)->bytes)
-        resize(source,bytes);
+        array_resize(source, bytes);
     return *source;
 }
 
-arrayp copya(arrayp source)
+array_p array_copy(array_p source)
 {
     if(!source)
         return NULL;
-    arrayp destination = (arrayp)malloc(sizeof(array));
+    array_p destination = (array_p)malloc(sizeof(array_t));
     if(!destination)
         return NULL;
     destination->bytes = source->bytes;
@@ -91,14 +91,14 @@ arrayp copya(arrayp source)
     return destination;
 }
 
-size_t sizeofa(arrayp a)
+size_t array_sizeof(array_p a)
 {
     if(!a)
         return 0;
-    return a->bytes + sizeof(array);
+    return a->bytes + sizeof(array_t);
 }
 
-unsigned char issima(arrayp a,arrayp b)
+unsigned char array_issim(array_p a, array_p b)
 {
     if(!a)
         return !b;
@@ -107,11 +107,11 @@ unsigned char issima(arrayp a,arrayp b)
     return a->bytes == b->bytes;
 }
 
-unsigned char iseqa(arrayp a,arrayp b)
+unsigned char array_iseq(array_p a, array_p b)
 {
     if(!a && !b)
         return 1;
-    if(!issima(a,b))
+    if(!array_issim(a, b))
         return 0;
     if(a->used != b->used)
         return 0;
@@ -124,13 +124,13 @@ unsigned char iseqa(arrayp a,arrayp b)
     return 1;
 }
 
-void dela(arrayp a)
+void array_del(array_p a)
 {
     free(a->a);
     free(a);
 }
 
-arrayp stracpy(arrayp destination, arrayp source)
+array_p array_strcpy(array_p destination, array_p source)
 {
     if(!destination)
         return NULL;
@@ -147,7 +147,7 @@ arrayp stracpy(arrayp destination, arrayp source)
     return destination;
 }
 
-arrayp strancpy(arrayp destination, TYPE_ARRAY_SIZE count, arrayp source)
+array_p array_strncpy(array_p destination, TYPE_ARRAY_SIZE count, array_p source)
 {
     if(count == 0)
         return destination;
@@ -166,7 +166,7 @@ arrayp strancpy(arrayp destination, TYPE_ARRAY_SIZE count, arrayp source)
     return destination;
 }
 
-arrayp stracpy2(arrayp destination,const char* source)
+array_p array_strcpy2(array_p destination, const char* source)
 {
     if(!destination)
         return NULL;
@@ -183,7 +183,7 @@ arrayp stracpy2(arrayp destination,const char* source)
     return destination;
 }
 
-arrayp strancpy2(arrayp destination, TYPE_ARRAY_SIZE count,const char* source)
+array_p array_strncpy2(array_p destination, TYPE_ARRAY_SIZE count, const char* source)
 {
     strncpy_s(atos(destination), destination->bytes, source, count);
     destination->used = strnlen_s(atos(destination),destination->bytes);

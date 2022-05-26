@@ -23,7 +23,7 @@ matrixp newme(TYPE_MATRIX_DIM_COUNT rows, TYPE_MATRIX_DIM_COUNT cols)
         return NULL;
     m->rows = rows;
     m->cols = cols;
-    m->data = (arrayp**)malloc(sizeof(arrayp*) * rows);
+    m->data = (array_p**)malloc(sizeof(array_p*) * rows);
     if(!m->data)
     {
         free(m);
@@ -32,7 +32,7 @@ matrixp newme(TYPE_MATRIX_DIM_COUNT rows, TYPE_MATRIX_DIM_COUNT cols)
     TYPE_MATRIX_DIM_COUNT row;
     foreach(rows,row)
     {
-        m->data[row] = (arrayp*)malloc(sizeof(arrayp) * cols);
+        m->data[row] = (array_p*)malloc(sizeof(array_p) * cols);
         if(!m->data[row])
         {
             for(; row >= 0; --row)
@@ -47,7 +47,7 @@ matrixp newme(TYPE_MATRIX_DIM_COUNT rows, TYPE_MATRIX_DIM_COUNT cols)
     return m;
 }
 
-matrixp newm(arrayp string)
+matrixp newm(array_p string)
 {
     TYPE_ARRAY_SIZE i,start,end,s;
     TYPE_MATRIX_DIM_COUNT rows = 0,cols = 0,row,col = 0;
@@ -144,11 +144,11 @@ matrixp newm(arrayp string)
 
 matrixp newml(char* name,TYPE_ARRAY_SIZE length)
 {
-    arrayp s = newas(name,length);
+    array_p s = array_news(name, length);
     if(!s)
         return NULL;
     matrixp result = newm(s);
-    dela(s);
+    array_del(s);
     return result;
 }
 
@@ -162,7 +162,7 @@ size_t sizeofm(matrixp m)
     {
         foreach(m->cols,col)
         {
-            size += sizeofa(m->data[row][col]);
+            size += array_sizeof(m->data[row][col]);
             foreach(m->data[row][col]->used,i)
                 size += sizeofv(geta(m->data[row][col], i));
         }
@@ -203,7 +203,7 @@ void delm(matrixp m)
         {
             for(; m->data[m->rows - 1][m->cols - 1]->used > 0; m->data[m->rows - 1][m->cols - 1]->used--)
                 delv(geta(m->data[m->rows - 1][m->cols - 1], m->data[m->rows - 1][m->cols - 1]->used - 1));
-            dela(m->data[m->rows - 1][m->cols - 1]);
+            array_del(m->data[m->rows - 1][m->cols - 1]);
         }
         free(m->data[m->rows - 1]);
     }
@@ -238,7 +238,7 @@ unsigned char iseqm(matrixp m1,matrixp m2)
     return 1;
 }
 
-int_least64_t findm(arrayp entities,matrixp m)
+int_least64_t findm(array_p entities, matrixp m)
 {
     int_least64_t i;
     foreachau(entities,i)
@@ -267,7 +267,7 @@ void printm(matrixp m)
     fputc(SIGN_MATRIX_CLOSE,stdout);
 }
 
-void printma(arrayp matrices)
+void printma(array_p matrices)
 {
     TYPE_ARRAY_SIZE i;
     foreachau(matrices,i)

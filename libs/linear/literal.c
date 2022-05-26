@@ -27,7 +27,7 @@ char ispar(char par)
     }
 }
 
-void parseEntities(arrayp* variables,arrayp* matrices, char* string, unsigned short length)
+void parseEntities(array_p* variables, array_p* matrices, char* string, unsigned short length)
 {
     /*{
         char tmp[MAX_VAR_NAME_LENGTH];
@@ -75,7 +75,7 @@ void parseEntities(arrayp* variables,arrayp* matrices, char* string, unsigned sh
         parseExpression(variables, string + s, i - s - 1);
 }
 
-unsigned char parseExpression(arrayp* expression, char* string, unsigned short length)
+unsigned char parseExpression(array_p* expression, char* string, unsigned short length)
 {
     /*{
         char tmp[MAX_VAR_NAME_LENGTH];
@@ -88,7 +88,7 @@ unsigned char parseExpression(arrayp* expression, char* string, unsigned short l
         if(isop(string[i]) || (isalnum(string[i]) && count == 0))
             count++;
     }
-    *expression = newa(sizeof(variable) * count);
+    *expression = array_new(sizeof(variable) * count);
     if(!*expression)
         return 0;
     count = 0;

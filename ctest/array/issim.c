@@ -6,28 +6,28 @@
 #include <array.h>
 
 cteststart()
-        array a;
-        array b;
+        array_t a;
+        array_t b;
 
         a.bytes = 10;
         a.used = 0;
         b.bytes = 10;
         b.used = 0;
-        assert(issima(&a,&b));
+        assert(array_issim(&a, &b));
 
         a.bytes = 10;
         a.used = 1;
         b.bytes = 10;
         b.used = 5;
-        assert(issima(&a,&b));
+        assert(array_issim(&a, &b));
 
         a.bytes = 0;
         a.used = 0;
         b.bytes = 0;
         b.used = 0;
-        assert(issima(&a,&b));
+        assert(array_issim(&a, &b));
 
-        assert(!issima(NULL,&b));
-        assert(!issima(&a,NULL));
-        assert(issima(NULL,NULL));
+        assert(!array_issim(NULL, &b));
+        assert(!array_issim(&a, NULL));
+        assert(array_issim(NULL, NULL));
 ctestend

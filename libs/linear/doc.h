@@ -17,17 +17,17 @@ char ispar(char par);
 /**
  * Instantiates a new variable struct from given coefficient and name.
  * @param coeff The coefficient of the variable
- * @param name The array string containing the name of the variable
+ * @param name The array_t string containing the name of the variable
  * @return A pointer to the the newly created variable struct or {@link NULL} if the creation fails
  */
-variablep newv(TYPE_VAR_COEFF coeff,arrayp name);
+variablep newv(TYPE_VAR_COEFF coeff, array_p name);
 
 /**
  * Instantiates a new variable struct from given coefficient and name just like {@link newv} but the variable name is
- * given as char array and length count.
+ * given as char array_t and length count.
  * @param coeff The coefficient of the variable
- * @param name The char array containing the name of the variable
- * @param length The length of the char array
+ * @param name The char array_t containing the name of the variable
+ * @param length The length of the char array_t
  * @return A pointer to the the newly created variable struct or {@link NULL} if the creation fails
  */
 variablep newvl(TYPE_VAR_COEFF coeff, char* name, TYPE_VAR_NAME_LENGTH length);

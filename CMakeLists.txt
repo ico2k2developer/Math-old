@@ -5,6 +5,9 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(Math2 main.c)
 
+add_subdirectory(libs/bool8)
+target_link_libraries(Math2 bool8)
+
 add_subdirectory(libs/array)
 target_link_libraries(Math2 array)
 

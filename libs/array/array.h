@@ -27,24 +27,24 @@ typedef struct
 {
     char* a;
     TYPE_ARRAY_SIZE bytes,used;
-}array;
+}array_t;
 
-typedef array* arrayp;
+typedef array_t* array_p;
 
-arrayp          newa(TYPE_ARRAY_SIZE bytes);
-arrayp          newa0(TYPE_ARRAY_SIZE bytes);
-arrayp          newas(char* string,TYPE_ARRAY_SIZE length);
-arrayp          resize(arrayp* source,TYPE_ARRAY_SIZE bytes);
-arrayp          ensuresize(arrayp* source,TYPE_ARRAY_SIZE bytes);
-arrayp          copya(arrayp source);
-size_t          sizeofa(arrayp a);
-unsigned char   issima(arrayp a,arrayp b);
-unsigned char   iseqa(arrayp a,arrayp b);
-void            dela(arrayp a);
+array_p         array_new(TYPE_ARRAY_SIZE bytes);
+array_p         array_new0(TYPE_ARRAY_SIZE bytes);
+array_p         array_news(char* string, TYPE_ARRAY_SIZE length);
+array_p         array_resize(array_p* source, TYPE_ARRAY_SIZE bytes);
+array_p         array_ensuresize(array_p* source, TYPE_ARRAY_SIZE bytes);
+array_p         array_copy(array_p source);
+size_t          array_sizeof(array_p a);
+unsigned char   array_issim(array_p a, array_p b);
+unsigned char   array_iseq(array_p a, array_p b);
+void            array_del(array_p a);
 
-arrayp          stracpy(arrayp destination,arrayp source);
-arrayp          strancpy(arrayp destination,TYPE_ARRAY_SIZE count,arrayp source);
-arrayp          stracpy2(arrayp destination,const char* source);
-arrayp          strancpy2(arrayp destination, TYPE_ARRAY_SIZE count,const char* source);
+array_p         array_strcpy(array_p destination, array_p source);
+array_p         array_strncpy(array_p destination, TYPE_ARRAY_SIZE count, array_p source);
+array_p         array_strcpy2(array_p destination, const char* source);
+array_p         array_strncpy2(array_p destination, TYPE_ARRAY_SIZE count, const char* source);
 
 #endif //MATH2_ARRAY_H

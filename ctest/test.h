@@ -14,6 +14,7 @@
         STR(__LINE__)"\n",stderr); error(); } } while(0)
 
 #define zero(...) assert(__VA_ARGS__ == 0)
+#define one(...) assert(__VA_ARGS__ == 1)
 #define nonzero(...) assert(__VA_ARGS__ != 0)
 #define null(...) assert(__VA_ARGS__ == NULL)
 #define nonnull(...) assert(__VA_ARGS__ != NULL)

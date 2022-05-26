@@ -4,29 +4,29 @@
 
 #include "literal.h"
 
-variablep newv(TYPE_VAR_COEFF coeff,arrayp name)
+variablep newv(TYPE_VAR_COEFF coeff, array_p name)
 {
     variablep v = (variablep)malloc(sizeof(variable));
     if(!v)
         return NULL;
-    v->name = newa(name->bytes);
+    v->name = array_new(name->bytes);
     if(!v->name)
     {
         free(v);
         return NULL;
     }
-    stracpy(v->name,name);
+    array_strcpy(v->name, name);
     v->coeff = coeff;
     return v;
 }
 
 variablep newvl(TYPE_VAR_COEFF coeff, char* name,TYPE_VAR_NAME_LENGTH length)
 {
-    arrayp s = newas(name,length);
+    array_p s = array_news(name, length);
     if(!s)
         return NULL;
     variablep result = newv(coeff,s);
-    dela(s);
+    array_del(s);
     return result;
 }
 
@@ -37,12 +37,12 @@ variablep copyv(variablep source)
 
 size_t sizeofv(variablep v)
 {
-    return sizeofa(v->name) + sizeof(variable);
+    return array_sizeof(v->name) + sizeof(variable);
 }
 
 void delv(variablep v)
 {
-    dela(v->name);
+    array_del(v->name);
     free(v);
 }
 
@@ -56,7 +56,7 @@ unsigned char iseqv(variablep v1, variablep v2)
     return issimv(v1, v2) && v1->coeff == v2->coeff;
 }
 
-int_least64_t findv(arrayp entities, variablep v)
+int_least64_t findv(array_p entities, variablep v)
 {
     int_least64_t i;
     foreachau(entities,i)
@@ -67,7 +67,7 @@ int_least64_t findv(arrayp entities, variablep v)
     return -1;
 }
 
-void printe(arrayp variables)
+void printe(array_p variables)
 {
     TYPE_ARRAY_SIZE i,i2;
     size_t size1,size2;
@@ -108,14 +108,14 @@ void printe(arrayp variables)
     }
 }
 
-void sumvv(arrayp expression,variablep var)
+void sumvv(array_p expression, variablep var)
 {
     int_least64_t pos = findv(expression, var);
     if(pos < 0)
     {
         size_t size = (expression->used + 1) * sizeof(variable);
         if(size > expression->bytes)
-            resize(expression, size);
+            array_resize(expression, size);
         seta(expression, expression->used++, var);
     }
     else
@@ -124,21 +124,21 @@ void sumvv(arrayp expression,variablep var)
     }
 }
 
-void sumva(arrayp expression, arrayp string)
+void sumva(array_p expression, array_p string)
 {
     variablep new;
     if(loadEntity(&new,atos(string),string->used) == 1)
         sumvv(expression,new);
 }
 
-void sumvl(arrayp expression, char* string, TYPE_VAR_NAME_LENGTH length)
+void sumvl(array_p expression, char* string, TYPE_VAR_NAME_LENGTH length)
 {
-    arrayp a = newas(string,length);
+    array_p a = array_news(string, length);
     sumva(expression,a);
-    dela(a);
+    array_del(a);
 }
 
-void subvv(arrayp expression,variablep var)
+void subvv(array_p expression, variablep var)
 {
     variable tmp;
     tmp.coeff = -var->coeff;
@@ -146,16 +146,16 @@ void subvv(arrayp expression,variablep var)
     sumvv(expression,&tmp);
 }
 
-void subva(arrayp expression, arrayp string)
+void subva(array_p expression, array_p string)
 {
     variablep new;
     if(loadEntity(&new,atos(string),string->used) == 1)
         subvv(expression,new);
 }
 
-void subvl(arrayp expression, char* string, TYPE_VAR_NAME_LENGTH length)
+void subvl(array_p expression, char* string, TYPE_VAR_NAME_LENGTH length)
 {
-    arrayp a = newas(string,length);
+    array_p a = array_news(string, length);
     subva(expression,a);
-    dela(a);
+    array_del(a);
 }

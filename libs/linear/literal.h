@@ -29,7 +29,7 @@
 
 typedef struct
 {
-    arrayp name;
+    array_p name;
     TYPE_VAR_COEFF coeff;
 }variable;
 
@@ -37,7 +37,7 @@ typedef variable* variablep;
 
 typedef struct
 {
-    arrayp** data;
+    array_p** data;
     TYPE_MATRIX_DIM_COUNT rows,cols;
 }matrix;
 
@@ -54,41 +54,41 @@ typedef enum
 
 char            isop(char op);
 char            ispar(char par);
-variablep       newv(TYPE_VAR_COEFF coeff,arrayp name);
+variablep       newv(TYPE_VAR_COEFF coeff, array_p name);
 variablep       newvl(TYPE_VAR_COEFF coeff, char* name, TYPE_VAR_NAME_LENGTH length);
 size_t          sizeofv(variablep v);
 variablep       copyv(variablep source);
 void            delv(variablep v);
 unsigned char   issimv(variablep v1, variablep v2);
 unsigned char   iseqv(variablep v1, variablep v2);
-int_least64_t   findv(arrayp entities, variablep v);
-void            printe(arrayp variables);
+int_least64_t   findv(array_p entities, variablep v);
+void            printe(array_p variables);
 
 
 char            ismatrx(char matrx);
 matrixp         newme(TYPE_MATRIX_DIM_COUNT rows, TYPE_MATRIX_DIM_COUNT cols);
-matrixp         newm(arrayp string);
+matrixp         newm(array_p string);
 matrixp         newml(char* name,TYPE_ARRAY_SIZE length);
 size_t          sizeofm(matrixp m);
 matrixp         copym(matrixp source);
 void            delm(matrixp m);
 unsigned char   issimm(matrixp m1,matrixp m2);
 unsigned char   iseqm(matrixp m1,matrixp m2);
-int_least64_t   findm(arrayp entities,matrixp m);
+int_least64_t   findm(array_p entities, matrixp m);
 void            printm(matrixp m);
-void            printma(arrayp matrices);
+void            printma(array_p matrices);
 
-void            sumvv(arrayp expression, variablep var);
-void            sumva(arrayp expression, arrayp string);
-void            sumvl(arrayp expression, char* string, TYPE_VAR_NAME_LENGTH length);
-void            subvv(arrayp expression,variablep var);
-void            subva(arrayp expression,arrayp string);
-void            subvl(arrayp expression,char* string,TYPE_VAR_NAME_LENGTH length);
+void            sumvv(array_p expression, variablep var);
+void            sumva(array_p expression, array_p string);
+void            sumvl(array_p expression, char* string, TYPE_VAR_NAME_LENGTH length);
+void            subvv(array_p expression, variablep var);
+void            subva(array_p expression, array_p string);
+void            subvl(array_p expression, char* string, TYPE_VAR_NAME_LENGTH length);
 
 unsigned char   summ(matrixp target, matrixp offset);
 
-void            parseEntities(arrayp* variables,arrayp* matrices, char* string, unsigned short length);
-unsigned char   parseExpression(arrayp* expression, char* string, unsigned short length);
+void            parseEntities(array_p* variables, array_p* matrices, char* string, unsigned short length);
+unsigned char   parseExpression(array_p* expression, char* string, unsigned short length);
 unsigned char   loadEntity(variablep* entity,char* string,unsigned char length);
 
 

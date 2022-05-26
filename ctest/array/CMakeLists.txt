@@ -1,29 +1,33 @@
 cmake_minimum_required(VERSION 3.14.0 FATAL_ERROR)
 
-add_executable(ctest_array_newa newa.c)
-add_executable(ctest_array_newa0 newa0.c)
-add_executable(ctest_array_newas newas.c)
+add_executable(ctest_array_new new.c)
+add_executable(ctest_array_new0 new0.c)
+add_executable(ctest_array_news news.c)
 add_executable(ctest_array_resize resize.c)
 add_executable(ctest_array_ensuresize ensuresize.c)
-add_executable(ctest_array_copya copya.c)
-add_executable(ctest_array_sizeofa sizeofa.c)
-add_executable(ctest_array_issima issima.c)
-add_executable(ctest_array_iseqa iseqa.c)
-add_executable(ctest_array_dela dela.c)
-add_executable(ctest_array_stracpy stracpy.c)
-add_executable(ctest_array_strancpy strancpy.c)
-add_executable(ctest_array_stracpy2 stracpy2.c)
+add_executable(ctest_array_copy copy.c)
+add_executable(ctest_array_sizeof sizeof.c)
+add_executable(ctest_array_issim issim.c)
+add_executable(ctest_array_iseq iseq.c)
+add_executable(ctest_array_del del.c)
+add_executable(ctest_array_strcpy strcpy.c)
+add_executable(ctest_array_strncpy strncpy.c)
+add_executable(ctest_array_strcpy2 strcpy2.c)
+add_executable(ctest_array_strncpy2 strncpy2.c)
 
-add_test(array_newa ctest_array_newa)
-add_test(array_newa0 ctest_array_newa0)
-add_test(array_newas ctest_array_newas)
-add_test(array_resize ctest_array_resize)
-add_test(array_ensuresize ctest_array_ensuresize)
-add_test(array_copya ctest_array_copya)
-add_test(array_sizeofa ctest_array_sizeofa)
-add_test(array_issima ctest_array_issima)
-add_test(array_iseqa ctest_array_iseqa)
-add_test(array_dela ctest_array_dela)
-add_test(array_stracpy ctest_array_stracpy)
-add_test(array_strancpy ctest_array_strancpy)
-add_test(array_stracpy2 ctest_array_stracpy2)
+add_test(ctest_array
+        ctest_array_new
+        ctest_array_new0
+        ctest_array_news
+        ctest_array_resize
+        ctest_array_ensuresize
+        ctest_array_copy
+        ctest_array_sizeof
+        ctest_array_issim
+        ctest_array_iseq
+        ctest_array_del
+        ctest_array_strcpy
+        ctest_array_strncpy
+        ctest_array_strcpy2
+        ctest_array_strncpy2
+        )

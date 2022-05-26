@@ -2,13 +2,13 @@
 
 int main(void)
 {
-    arrayp string = newa(SIZE_BUFFER + 1);
+    array_p string = array_new(SIZE_BUFFER + 1);
     if(!string)
         return 1;
-    arrayp variables = newa(sizeof(variable) * SIZE_VARIABLES);
+    array_p variables = array_new(sizeof(variable) * SIZE_VARIABLES);
     if(!variables)
         return 2;
-    arrayp matrices = newa(sizeof(matrix) * SIZE_MATRICES);
+    array_p matrices = array_new(sizeof(matrix) * SIZE_MATRICES);
     if(!matrices)
         return 3;
 
@@ -36,9 +36,9 @@ int main(void)
     {
         delm((matrixp)geta(matrices, matrices->used - 1));
     }
-    dela(variables);
-    dela(matrices);
-    dela(string);
+    array_del(variables);
+    array_del(matrices);
+    array_del(string);
     fputc('\n',stdout);
     return 0;
 }

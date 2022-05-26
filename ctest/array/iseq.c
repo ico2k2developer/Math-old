@@ -6,12 +6,12 @@
 #include <array.h>
 
 cteststart()
-        arrayp a;
-        arrayp b;
+        array_p a;
+        array_p b;
         TYPE_ARRAY_SIZE i;
 
-        a = newa(10);
-        b = newa(10);
+        a = array_new(10);
+        b = array_new(10);
         foreach(10,i)
         {
             seta(a,i,(i + 1) * 2);
@@ -19,20 +19,20 @@ cteststart()
             a->used++;
             b->used++;
         }
-        assert(iseqa(a,b));
+        assert(array_iseq(a, b));
 
         a->used--;
-        assert(!iseqa(a,b));
+        assert(!array_iseq(a, b));
 
         a->used++;
         b->bytes--;
-        assert(!iseqa(a,b));
+        assert(!array_iseq(a, b));
 
         b->bytes++;
         seta(b,4,0);
-        assert(!iseqa(a,b));
+        assert(!array_iseq(a, b));
 
-        assert(!iseqa(a,NULL));
-        assert(!iseqa(NULL,b));
-        assert(iseqa(NULL,NULL));
+        assert(!array_iseq(a, NULL));
+        assert(!array_iseq(NULL, b));
+        assert(array_iseq(NULL, NULL));
 ctestend
