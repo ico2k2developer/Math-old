@@ -2,10 +2,22 @@
 
 int main(void)
 {
+    char* s;
 
-    number_N_p n = number_N_new(333);
-    char* s = number_N_print(n);
-    printf("The value of n is %s\n",s);
+    number_N_p a = number_N_new(2);
+    s = number_N_print(a);
+    printf("The value of a is %s\n",s);
+    free(s);
+
+    number_N_p b = number_N_new(7);
+    s = number_N_print(b);
+    printf("The value of b is %s\n",s);
+    free(s);
+
+    number_N_pow_raw(a,5);
+
+    s = number_N_print(a);
+    printf("The value of a is %s\n",s);
     free(s);
 
     /*

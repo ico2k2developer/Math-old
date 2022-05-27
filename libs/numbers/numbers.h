@@ -5,6 +5,6 @@
 #ifndef MATH2_NUMBERS_H
 #define MATH2_NUMBERS_H
 
-#include "n.h"
+#include "z.h"
 
 #endif //MATH2_NUMBERS_H

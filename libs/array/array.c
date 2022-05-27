@@ -45,32 +45,36 @@ array_p array_news(const char* string,const TYPE_ARRAY_SIZE length)
     return a;
 }
 
-array_p array_resize(const array_p* source,const TYPE_ARRAY_SIZE bytes)
+array_p array_resize(array_p* source,const TYPE_ARRAY_SIZE bytes)
 {
     if(!source)
         return NULL;
-    if(!*source)
-        return NULL;
-    if(bytes != (*source)->bytes)
-    {
-        (*source)->data = realloc((*source)->data,bytes);
-        if(!(*source)->data && bytes != 0)
-            return NULL;
-        (*source)->bytes = bytes;
-        if((*source)->used > bytes)
-            (*source)->used = bytes;
+    if(*source) {
+        if (bytes != (*source)->bytes) {
+            (*source)->data = realloc((*source)->data, bytes);
+            if (!(*source)->data && bytes != 0)
+                return NULL;
+            (*source)->bytes = bytes;
+            if ((*source)->used > bytes)
+                (*source)->used = bytes;
+        }
     }
+    else
+        *source = array_new(bytes);
     return *source;
 }
 
-array_p array_ensuresize(const array_p* source,TYPE_ARRAY_SIZE bytes)
+array_p array_ensuresize(array_p* source,TYPE_ARRAY_SIZE bytes)
 {
     if(!source)
         return NULL;
-    if(!*source)
-        return NULL;
-    if(bytes > (*source)->bytes)
-        array_resize(source, bytes);
+    if(*source)
+    {
+        if(bytes > (*source)->bytes)
+            array_resize(source, bytes);
+    }
+    else
+        array_resize(source,bytes);
     return *source;
 }
 
@@ -134,6 +138,25 @@ void array_del(const array_p a)
     if(a)
         free(a->data);
     free(a);
+}
+
+
+array_p array_sprintf(array_p destination,const char* format,...)
+{
+    va_list arg;
+    va_start(arg,format);
+    size_t len = vsprintf_s(atos(destination),destination->bytes,format,arg);
+    va_end(arg);
+
+    if((len + 1) > destination->bytes)
+    {
+        array_ensuresize(&destination,)
+    }
+}
+
+array_p array_snprintf(array_p destination,size_t lenght,const char* format,...
+{
+
 }
 
 array_p array_strcpy(const array_p destination,const array_p source)
